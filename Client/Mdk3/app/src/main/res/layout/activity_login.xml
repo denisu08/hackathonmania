@@ -6,7 +6,24 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.user.mdk3.LoginActivity">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/labelNIK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NIK"
+        android:layout_alignParentLeft="true"/>
+    <EditText
+        android:id="@+id/nik"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="NIK"
+        android:layout_toRightOf="@id/labelNIK"
+        android:layout_alignBaseline="@id/labelNIK"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_button_label"
+        android:layout_toRightOf="@id/nik"
+        android:layout_alignBaseline="@id/labelNIK"/>
 
 </RelativeLayout>

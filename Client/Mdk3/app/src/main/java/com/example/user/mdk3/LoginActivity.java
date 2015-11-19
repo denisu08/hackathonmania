@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.user.mdk3.utility.SessionManager;
+
 
 public class LoginActivity extends ActionBarActivity {
 
@@ -12,6 +14,9 @@ public class LoginActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        SessionManager session = new SessionManager(getApplicationContext());
+
     }
 
     @Override

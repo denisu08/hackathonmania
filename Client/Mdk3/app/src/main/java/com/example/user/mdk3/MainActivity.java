@@ -1,9 +1,12 @@
 package com.example.user.mdk3;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.user.mdk3.utility.SessionManager;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -12,6 +15,12 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SessionManager session  = new SessionManager(getApplicationContext());
+        if(!session.isLoggedIn()){
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
