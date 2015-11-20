@@ -13,8 +13,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.user.mdk3.model.User;
 import com.example.user.mdk3.utility.SessionManager;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -125,10 +127,10 @@ public class LoginActivity extends AppCompatActivity {
         // isSuccess = callService()
 
         if(isSuccess){
-            User user = new User();
-            user.setNama("");
-            user.setNik("");
-            session.setLoginSession(user);
+            Map sessionMap = new HashMap();
+            sessionMap.put("nama",name);
+            sessionMap.put("nik",password);
+            session.setLoginSession(sessionMap);
 
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
