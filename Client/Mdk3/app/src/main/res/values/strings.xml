@@ -7,4 +7,9 @@
     <string name="title_activity_login">LoginActivity</string>
 
     <string name="login_button_label">Login</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="nama_asli">Nama Panjang</string>
+    <string name="password_nik">Password NIK</string>
+    <string name="login">Login</string>
+    <string name="no_account_yet">No NIK yet? please register</string>
 </resources>
