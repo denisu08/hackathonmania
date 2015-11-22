@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.user.mdk3" >
+    package="com.coko.mdk3" >
 
     <application
         android:allowBackup="true"
@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.user.com.coko.mdk3.SplashActivity"
+            android:name="com.coko.mdk3.SplashActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,15 +17,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.user.com.coko.mdk3.MainActivity"
+            android:name="com.coko.mdk3.MainActivity"
             android:label="MainActivity" >
         </activity>
         <activity
-            android:name="com.example.user.com.coko.mdk3.LoginActivity"
+            android:name="com.coko.mdk3.LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
         <activity
-            android:name="com.example.user.com.coko.mdk3.SignUpActivity"
+            android:name="com.coko.mdk3.SignUpActivity"
             android:label="@string/title_activity_sign_up" >
         </activity>
     </application>

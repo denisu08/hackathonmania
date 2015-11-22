@@ -1,4 +1,4 @@
-package com.example.user.mdk3;
+package com.coko.mdk3;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.user.mdk3.utility.SessionManager;
+import com.coko.mdk3.utility.SessionManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "loginActivity";
     private EditText nameEditText, passwordEditText;
     private Button loginButton;
-    private TextView linkSignupText,nameErrorMessageText,passwordErrorMessageText;
+    private TextView linkSignupText;
 
     SessionManager session;
 
@@ -36,9 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         session = new SessionManager(getApplicationContext());
 
         nameEditText = (EditText) findViewById(R.id.input_name);
-        nameErrorMessageText = (TextView) findViewById(R.id.name_warning_message);
         passwordEditText = (EditText) findViewById(R.id.input_password);
-        passwordErrorMessageText = (TextView) findViewById(R.id.password_warning_message);
         loginButton = (Button) findViewById(R.id.login_btn);
         linkSignupText = (TextView) findViewById(R.id.link_signup);
 
@@ -92,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
+        // TODO : change execute login process to asynch task
         new Handler().postDelayed(
                 new Runnable(){
                     public void run(){
@@ -139,4 +138,6 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
+
+    // TODO : onBack from login activity kill/finish the application
 }

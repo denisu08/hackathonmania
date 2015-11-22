@@ -1,4 +1,4 @@
-package com.example.user.mdk3.utility;
+package com.coko.mdk3.utility;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -35,8 +35,14 @@ public class SessionManager {
             Map.Entry pair = (Map.Entry)iterator.next();
             editor.putString((String)pair.getKey(),(String)pair.getValue());
         }
+        editor.commit();
     }
     public boolean isLoggedIn(){
         return preferences.getBoolean(IS_LOGIN,false);
+    }
+
+    public void clearAllSession(){
+        editor.clear();
+        editor.commit();
     }
 }

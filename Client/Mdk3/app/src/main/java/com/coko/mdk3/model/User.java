@@ -1,4 +1,4 @@
-package com.example.user.mdk3.model;
+package com.coko.mdk3.model;
 
 import java.util.Date;
 

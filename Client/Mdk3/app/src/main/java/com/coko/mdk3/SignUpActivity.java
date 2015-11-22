@@ -1,4 +1,4 @@
-package com.example.user.mdk3;
+package com.coko.mdk3;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;

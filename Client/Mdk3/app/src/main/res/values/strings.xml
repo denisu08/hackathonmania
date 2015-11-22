@@ -12,4 +12,12 @@
     <string name="password_nik">Password NIK</string>
     <string name="login">Login</string>
     <string name="no_account_yet">No NIK yet? please register</string>
+
+    <string-array name="navigation_drawer_items_array">
+        <item>Help</item>
+        <item>Logout</item>
+    </string-array>
+
+    <string name="drawer_open">Open Navigation</string>
+    <string name="drawer_close">Close Navigation</string>
 </resources>
