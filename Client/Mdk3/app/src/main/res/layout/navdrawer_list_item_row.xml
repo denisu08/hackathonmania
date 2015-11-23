@@ -20,7 +20,7 @@
         android:layout_toRightOf="@id/iconNavDrawer"
         android:paddingRight="10dp"
         android:text="Folder name here"
-        android:textColor="#ffffff"
+        android:textColor="@color/blue_grey_300"
         />
 
 </RelativeLayout>
