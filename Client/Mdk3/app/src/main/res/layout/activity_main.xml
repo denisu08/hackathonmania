@@ -8,20 +8,22 @@
     <!-- main activity UI -->
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="#ffffffff"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
+    <GridView
+        android:id="@+id/dashboard_grid"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"/>
+        android:listSelector="@android:color/transparent"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="20dp"
+        android:layout_centerInParent="true"
+        android:numColumns="2"
+        android:layout_below="@id/toolbar"/>
 </RelativeLayout>
 
     <!-- left navigation drawer UI-->
@@ -30,6 +32,9 @@
         android:layout_width="200dp"
         android:layout_height="match_parent"
         android:layout_gravity="left|start"
-        android:background="#ffeeeeee"/>
+        android:background="#111"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="2dp"
+        android:layout_below="@id/toolbar"/>
 
 </android.support.v4.widget.DrawerLayout>

@@ -2,18 +2,11 @@
 <items version="2" >
 
     <item
-        jar="E:\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
+        jar="E:\hackathonmania\Client\Mdk3\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.0\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
-        <dex dex="E:\hackathonmania\Client\Mdk3\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.0-2580f30025d5ca7b95e22bb9116fb6ccad53e2aa.jar" />
-    </item>
-    <item
-        jar="E:\hackathonmania\Client\Mdk3\app\build\intermediates\exploded-aar\com.android.support\design\22.2.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="fc63b820d54c8a27a3a614bdd93920e0076581c2">
-        <dex dex="E:\hackathonmania\Client\Mdk3\app\build\intermediates\pre-dexed\debug\classes-d9d56ad465aa3e6d111bccbf79264c9ba96e2df0.jar" />
+        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
+        <dex dex="E:\hackathonmania\Client\Mdk3\app\build\intermediates\pre-dexed\debug\classes-d32447acdde5c5b4d14765944639755046af31a8.jar" />
     </item>
     <item
         jar="E:\hackathonmania\Client\Mdk3\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
@@ -30,11 +23,18 @@
         <dex dex="E:\hackathonmania\Client\Mdk3\app\build\intermediates\pre-dexed\debug\classes-1a9f719c70dd3750cbec7d5b210b089c3f341d5d.jar" />
     </item>
     <item
-        jar="E:\hackathonmania\Client\Mdk3\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.0\jars\classes.jar"
+        jar="E:\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
-        <dex dex="E:\hackathonmania\Client\Mdk3\app\build\intermediates\pre-dexed\debug\classes-d32447acdde5c5b4d14765944639755046af31a8.jar" />
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="E:\hackathonmania\Client\Mdk3\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.0-2580f30025d5ca7b95e22bb9116fb6ccad53e2aa.jar" />
+    </item>
+    <item
+        jar="E:\hackathonmania\Client\Mdk3\app\build\intermediates\exploded-aar\com.android.support\design\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="fc63b820d54c8a27a3a614bdd93920e0076581c2">
+        <dex dex="E:\hackathonmania\Client\Mdk3\app\build\intermediates\pre-dexed\debug\classes-d9d56ad465aa3e6d111bccbf79264c9ba96e2df0.jar" />
     </item>
 
 </items>

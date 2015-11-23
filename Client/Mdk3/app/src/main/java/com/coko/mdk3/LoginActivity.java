@@ -136,8 +136,11 @@ public class LoginActivity extends AppCompatActivity {
         }else{
             Toast.makeText(getApplicationContext(),"Login Failed", Toast.LENGTH_LONG).show();
         }
-
     }
 
-    // TODO : onBack from login activity kill/finish the application
+    @Override
+    public void onStop(){
+        super.onStop();
+        finish();
+    }
 }
