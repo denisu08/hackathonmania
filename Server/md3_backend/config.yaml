@@ -1,0 +1,22 @@
+message: test config.
+messageRepetitions: 3
+
+database:
+  driverClass: com.mysql.jdbc.Driver
+  user: mdk3user
+  password: mdk3password
+  url: jdbc:mysql://localhost:8889/mdk3db
+  
+authenticationCachePolicy: 
+  maximumSize=10000, 
+  expireAfterAccess=10m
+  
+server:
+    applicationConnectors:
+        - type: http
+          # The port the application will listen on
+          port: 8080
+    adminConnectors:
+        - type: http
+          # The admin port
+          port: 8081
