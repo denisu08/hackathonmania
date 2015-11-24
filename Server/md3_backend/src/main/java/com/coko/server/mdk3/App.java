@@ -24,6 +24,7 @@ import com.coko.server.mdk3.health.Mdk3ServerHealthCheck;
 import com.coko.server.mdk3.representations.User;
 import com.coko.server.mdk3.resources.ClientResource;
 import com.coko.server.mdk3.resources.EKTPModuleResource;
+import com.coko.server.mdk3.resources.UserResource;
 
 public class App extends Application<Mdk3Configuration> {
 	private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
@@ -52,11 +53,13 @@ public class App extends Application<Mdk3Configuration> {
 		final DBI jdbi = factory.build(e, c.getDataSourceFactory(), "mysql");
 		
 		// Add the resource to the environment
-		e.jersey().register(new EKTPModuleResource(jdbi, e.getValidator()));
+//		e.jersey().register(new EKTPModuleResource(jdbi, e.getValidator()));
 		
 		// build the client and add the resource to the environment
 		final Client client = new JerseyClientBuilder(e).build("REST Client");
-		e.jersey().register(new ClientResource(client));
+//		e.jersey().register(new ClientResource(client));
+		
+		e.jersey().register(new UserResource(jdbi, e.getValidator()));
 		
 		Mdk3Authenticator phoneAuthenticator = new Mdk3Authenticator(jdbi);
 		CachingAuthenticator<BasicCredentials, User> cachingAuthenticator = new CachingAuthenticator<>(

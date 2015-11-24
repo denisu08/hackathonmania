@@ -25,7 +25,8 @@ public class Mdk3Authenticator implements Authenticator<BasicCredentials, User> 
 		User validUser = userDao.getUser(credentials.getUsername(), credentials.getPassword());
 		
 		if(validUser != null) {
-			validUser.setRoles(userDao.getRoles(validUser.getName()));
+			validUser.setRoles(userDao.getRoles(validUser.getId()));
+			validUser.setModules(userDao.getModules(validUser.getRoles()));
 			return Optional.of(validUser);
 		}
 		

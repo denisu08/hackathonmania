@@ -44,6 +44,7 @@ public class EKTPModuleResource {
     
 	@GET
 	@Path("/{id}")
+	@RolesAllowed({"admin", "staff", "user"})
 	public Response getContact(@PathParam("id") int id) {
 		// retrieve information about the contact with the provided id
 		DataKTP contact = contactDao.getContactById(id);
