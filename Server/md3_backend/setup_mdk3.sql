@@ -6,8 +6,21 @@ GRANT ALL ON mdk3db.* TO 'mdk3user'@'localhost';
 
 USE `mdk3db`;
 
+-- phpMyAdmin SQL Dump
+-- version 4.1.12
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost:8889
+-- Generation Time: Nov 25, 2015 at 02:02 AM
+-- Server version: 5.5.34
+-- PHP Version: 5.5.10
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+--
+-- Database: `mdk3db`
+--
 
 -- --------------------------------------------------------
 
@@ -397,6 +410,15 @@ CREATE TABLE `sec_user_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `sec_user_role`
+--
+
+INSERT INTO `sec_user_role` (`id`, `userId`, `roleCode`, `created_dt`, `created_by`) VALUES
+('1b7965e0-92d3-11e5-9742-5d0b21822c55', '18aae9c6-92c7-11e5-b7ed-df75ad050f3c', 'staff', '2015-11-25', 'system'),
+('f745caa6-92d2-11e5-9742-5d0b21822c55', '1f337222-92c7-11e5-b7ed-df75ad050f3c', 'user', '2015-11-25', 'system'),
+('f745f15c-92d2-11e5-9742-5d0b21822c55', '18aae9c6-92c7-11e5-b7ed-df75ad050f3c', 'admin', '2015-11-25', 'system');
+
+--
 -- Constraints for dumped tables
 --
 
@@ -410,10 +432,10 @@ ALTER TABLE `dat_balance`
 -- Constraints for table `dat_ktp`
 --
 ALTER TABLE `dat_ktp`
-  ADD CONSTRAINT `fk_ktp_kecamatan` FOREIGN KEY (`Kecamatan`) REFERENCES `mt_kecamatan` (`cd`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_ktp_status_kawin` FOREIGN KEY (`Status_Kawin`) REFERENCES `mt_status_kawin` (`cd`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_ktp_agama` FOREIGN KEY (`Agama`) REFERENCES `mt_agama` (`cd`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_ktp_jenis_kelamin` FOREIGN KEY (`Jenis_Kelamin`) REFERENCES `mt_jenis_kelamin` (`cd`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_ktp_agama` FOREIGN KEY (`Agama`) REFERENCES `mt_agama` (`cd`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_ktp_kecamatan` FOREIGN KEY (`Kecamatan`) REFERENCES `mt_kecamatan` (`cd`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_ktp_status_kawin` FOREIGN KEY (`Status_Kawin`) REFERENCES `mt_status_kawin` (`cd`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `log_financial_history`
@@ -458,3 +480,4 @@ ALTER TABLE `sec_user_pass`
 ALTER TABLE `sec_user_role`
   ADD CONSTRAINT `fk_sec_user_role_role` FOREIGN KEY (`roleCode`) REFERENCES `sec_role` (`code`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_sec_user_role_user` FOREIGN KEY (`userId`) REFERENCES `sec_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
