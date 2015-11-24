@@ -1,28 +1,24 @@
-package com.example.user.mdk3;
+package com.coko.mdk3;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.user.mdk3.utility.SessionManager;
-
-
-public class LoginActivity extends ActionBarActivity {
+public class ElectionScheduleActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        SessionManager session = new SessionManager(getApplicationContext());
-
     }
 
     @Override
+    protected int getLayoutResource(){
+        return R.layout.activity_election_schedule;
+    }
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
+        getMenuInflater().inflate(R.menu.menu_election_schedule, menu);
         return true;
     }
 
