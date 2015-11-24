@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.coko.mdk3.SplashActivity"
+            android:name=".SplashActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,16 +17,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.coko.mdk3.MainActivity"
-            android:label="MainActivity" >
+            android:name=".MainActivity"
+            android:label="@string/title_main_activity" >
         </activity>
         <activity
-            android:name="com.coko.mdk3.LoginActivity"
+            android:name=".LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
         <activity
-            android:name="com.coko.mdk3.SignUpActivity"
+            android:name=".SignUpActivity"
             android:label="@string/title_activity_sign_up" >
+        </activity>
+        <activity
+            android:name=".ElectionScheduleActivity"
+            android:label="@string/title_activity_election_schedule"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
         </activity>
     </application>
 
