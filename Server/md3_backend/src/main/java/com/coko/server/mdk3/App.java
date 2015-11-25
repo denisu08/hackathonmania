@@ -24,6 +24,7 @@ import com.coko.server.mdk3.health.Mdk3ServerHealthCheck;
 import com.coko.server.mdk3.representations.User;
 import com.coko.server.mdk3.resources.ClientResource;
 import com.coko.server.mdk3.resources.EKTPModuleResource;
+import com.coko.server.mdk3.resources.ParameterResource;
 import com.coko.server.mdk3.resources.UserResource;
 
 public class App extends Application<Mdk3Configuration> {
@@ -42,24 +43,19 @@ public class App extends Application<Mdk3Configuration> {
 	@Override
 	public void run(Mdk3Configuration c, Environment e) throws Exception {
 		LOGGER.info("Method App#run() called");
-		// System.out.println("Hello world, by Dropwizard!");
-		/* for (int i = 0; i < c.getMessageRepetitions(); i++) {
-			System.out.println(c.getMessage());
-		}
-		System.out.println(c.getAdditionalMessage()); */
 		
 		// Create a DBI factory and build a JDBI instance
 		final DBIFactory factory = new DBIFactory();
 		final DBI jdbi = factory.build(e, c.getDataSourceFactory(), "mysql");
+		final Client client = new JerseyClientBuilder(e).build("REST Client");
+		
+		// build the client and add the resource to the environment
+		// e.jersey().register(new ClientResource(client));
 		
 		// Add the resource to the environment
 //		e.jersey().register(new EKTPModuleResource(jdbi, e.getValidator()));
-		
-		// build the client and add the resource to the environment
-		final Client client = new JerseyClientBuilder(e).build("REST Client");
-//		e.jersey().register(new ClientResource(client));
-		
 		e.jersey().register(new UserResource(jdbi, e.getValidator()));
+		e.jersey().register(new ParameterResource(jdbi, e.getValidator()));
 		
 		Mdk3Authenticator phoneAuthenticator = new Mdk3Authenticator(jdbi);
 		CachingAuthenticator<BasicCredentials, User> cachingAuthenticator = new CachingAuthenticator<>(
