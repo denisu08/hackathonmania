@@ -20,13 +20,13 @@ import com.coko.server.mdk3.representations.User;
 
 @Path("/security")
 @Produces(MediaType.APPLICATION_JSON)
-public class UserResource {
+public class SecurityResource {
 	@Context
 	UriInfo uri;
 	
 	private final UserDAO userDAO;
 	private final Validator validator;
-    public UserResource(DBI jdbi, Validator validator) {
+    public SecurityResource(DBI jdbi, Validator validator) {
     	userDAO = jdbi.onDemand(UserDAO.class);
     	this.validator = validator;
     }

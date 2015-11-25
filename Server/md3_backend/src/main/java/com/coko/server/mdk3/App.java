@@ -24,8 +24,8 @@ import com.coko.server.mdk3.health.Mdk3ServerHealthCheck;
 import com.coko.server.mdk3.representations.User;
 import com.coko.server.mdk3.resources.ClientResource;
 import com.coko.server.mdk3.resources.EKTPModuleResource;
-import com.coko.server.mdk3.resources.ParameterResource;
-import com.coko.server.mdk3.resources.UserResource;
+import com.coko.server.mdk3.resources.PublicResource;
+import com.coko.server.mdk3.resources.SecurityResource;
 
 public class App extends Application<Mdk3Configuration> {
 	private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
@@ -54,8 +54,8 @@ public class App extends Application<Mdk3Configuration> {
 		
 		// Add the resource to the environment
 //		e.jersey().register(new EKTPModuleResource(jdbi, e.getValidator()));
-		e.jersey().register(new UserResource(jdbi, e.getValidator()));
-		e.jersey().register(new ParameterResource(jdbi, e.getValidator()));
+		e.jersey().register(new SecurityResource(jdbi, e.getValidator()));
+		e.jersey().register(new PublicResource(jdbi, e.getValidator()));
 		
 		Mdk3Authenticator phoneAuthenticator = new Mdk3Authenticator(jdbi);
 		CachingAuthenticator<BasicCredentials, User> cachingAuthenticator = new CachingAuthenticator<>(
