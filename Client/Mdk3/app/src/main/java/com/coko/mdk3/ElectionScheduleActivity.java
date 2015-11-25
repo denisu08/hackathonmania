@@ -1,14 +1,51 @@
 package com.coko.mdk3;
 
+import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 public class ElectionScheduleActivity extends BaseActivity {
 
+    private static final String TAG_INFO = "info_id";
+    private LinearLayout linearLayout;
+    private View.OnClickListener mClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            v.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+            //TODO: need change to database query for detail data
+            Intent intent = new Intent(ElectionScheduleActivity.this, ScheduleDetailActivity.class);
+            intent.putExtra(TAG_INFO,v.getId());
+            startActivity(intent);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+        linearLayout = (LinearLayout) findViewById(R.id.menu_list_schedule);
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.setMargins(20,12,20,12);
+
+
+        for(int i=0;i<2;i++) {
+            Button button = new Button(this);
+            button.setText("Pilihan " + (i + 1));
+            button.setLayoutParams(params);
+            button.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            button.setId(i);
+            button.setOnClickListener(mClickListener);
+            linearLayout.addView(button);
+
+        }
     }
 
     @Override

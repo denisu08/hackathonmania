@@ -48,8 +48,8 @@ public class MainActivity extends BaseActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(this,DetailPartaiActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this,DetailPartaiActivity.class);
+                startActivity(intent);
             }
         });
         //disable gridview scrolling

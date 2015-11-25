@@ -7,10 +7,14 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
 
-    <TextView
-        android:text="List election schedule goes here"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/menu_list_schedule"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"/>
+        android:orientation="vertical"
+        android:layout_below="@id/toolbar"
+        >
+
+    </LinearLayout>
 
 </RelativeLayout>
