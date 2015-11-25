@@ -31,10 +31,18 @@
         <activity
             android:name=".ElectionScheduleActivity"
             android:label="@string/title_activity_election_schedule"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".DetailPartaiActivity"
+            android:label="@string/title_activity_detail_partai" >
+        </activity>
+        <activity
+            android:name=".ScheduleDetailActivity"
+            android:label="@string/title_activity_schedule_detail" >
         </activity>
     </application>
 
