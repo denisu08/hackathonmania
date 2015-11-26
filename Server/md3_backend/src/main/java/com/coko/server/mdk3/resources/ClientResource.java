@@ -1,6 +1,5 @@
 package com.coko.server.mdk3.resources;
 
-import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -80,7 +79,6 @@ public class ClientResource {
 
 	@GET
 	@Path("deleteContact")
-//	@RolesAllowed("ADMIN")
 	public Response deleteContact(@QueryParam("id") int id) {
 		client.target("http://localhost:8080/contact/" + id).request().delete();;
 		return Response.noContent().entity("Contact was deleted!").build();

@@ -18,26 +18,37 @@ import org.skife.jdbi.v2.DBI;
 import com.coko.server.mdk3.dao.UserDAO;
 import com.coko.server.mdk3.representations.User;
 
-@Path("/user")
+@Path("/security")
 @Produces(MediaType.APPLICATION_JSON)
-public class UserResource {
+public class SecurityResource {
 	@Context
 	UriInfo uri;
 	
 	private final UserDAO userDAO;
 	private final Validator validator;
-    public UserResource(DBI jdbi, Validator validator) {
+    public SecurityResource(DBI jdbi, Validator validator) {
     	userDAO = jdbi.onDemand(UserDAO.class);
     	this.validator = validator;
     }
     
 	@GET
+	@Path("/session")
+	@RolesAllowed({"admin", "staff", "user"})
+	public Response getSession(@Auth User user) {
+		return Response.ok(user).build();
+	}
+	
+	@GET
+	@Path("/roles")
+	@RolesAllowed({"admin", "staff", "user"})
+	public Response getRoles(@Auth User user) {
+		return Response.ok(user.getRoles()).build();
+	}
+	
+	@GET
 	@Path("/menuaccess")
 	@RolesAllowed({"admin", "staff", "user"})
-	public Response getContact(@Auth User user, @Context HttpServletRequest request) {
-		
-//		User userLogin = (User) request.getSession().getAttribute("user");
-//		return Response.ok(userLogin).build();
-		return Response.ok(user).build();
+	public Response getMenuAccess(@Auth User user) {
+		return Response.ok(user.getModules()).build();
 	}
 }

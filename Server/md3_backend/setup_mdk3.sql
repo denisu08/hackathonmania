@@ -11,7 +11,7 @@ USE `mdk3db`;
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: Nov 25, 2015 at 02:02 AM
+-- Generation Time: Nov 26, 2015 at 01:15 AM
 -- Server version: 5.5.34
 -- PHP Version: 5.5.10
 
@@ -80,7 +80,7 @@ CREATE TABLE `dat_ktp` (
 --
 
 CREATE TABLE `log_financial_history` (
-  `id` varchar(20) NOT NULL,
+  `id` varchar(50) NOT NULL,
   `moduleCode` varchar(20) NOT NULL,
   `ref_no` varchar(20) NOT NULL,
   `status` varchar(20) NOT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE `log_financial_history` (
 --
 
 CREATE TABLE `log_nonfinancial_history` (
-  `id` varchar(20) NOT NULL,
+  `id` varchar(50) NOT NULL,
   `moduleCode` varchar(20) NOT NULL,
   `refNo` varchar(20) NOT NULL,
   `status` varchar(20) NOT NULL,
@@ -116,8 +116,8 @@ CREATE TABLE `log_nonfinancial_history` (
 --
 
 CREATE TABLE `log_user_history` (
-  `id` varchar(20) NOT NULL,
-  `userId` varchar(20) NOT NULL,
+  `id` varchar(50) NOT NULL,
+  `userId` varchar(50) NOT NULL,
   `status` varchar(20) NOT NULL,
   `created_dt` date NOT NULL,
   `created_by` varchar(20) NOT NULL,
@@ -140,17 +140,6 @@ CREATE TABLE `mt_agama` (
   PRIMARY KEY (`cd`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `mt_agama`
---
-
-INSERT INTO `mt_agama` (`cd`, `name`, `keterangan`, `is_delete`, `created_dt`, `created_by`) VALUES
-('budha', 'budha', 'budha', 'N', '2015-11-24 00:00:00', 'system'),
-('hindu', 'hindu', 'hindu', 'N', '2015-11-24 00:00:00', 'system'),
-('islam', 'islam', 'islam', 'N', '2015-11-24 00:00:00', 'system'),
-('khatolik', 'khatolik', 'khatolik', 'N', '2015-11-24 00:00:00', 'system'),
-('kristen', 'kristen', 'kristen', 'N', '2015-11-24 00:00:00', 'system');
-
 -- --------------------------------------------------------
 
 --
@@ -166,14 +155,6 @@ CREATE TABLE `mt_jenis_kelamin` (
   `created_by` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`cd`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `mt_jenis_kelamin`
---
-
-INSERT INTO `mt_jenis_kelamin` (`cd`, `name`, `keterangan`, `is_delete`, `created_dt`, `created_by`) VALUES
-('female', 'Perempuan', 'Perempuan', 'N', '2015-11-24 00:00:00', 'system'),
-('male', 'Laki-Laki', 'Laki-Laki', 'N', '2015-11-24 00:00:00', 'system');
 
 -- --------------------------------------------------------
 
@@ -256,14 +237,143 @@ CREATE TABLE `mt_status_kawin` (
   PRIMARY KEY (`cd`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `mt_status_kawin`
+-- Table structure for table `pem_anggota_partai`
 --
 
-INSERT INTO `mt_status_kawin` (`cd`, `name`, `keterangan`, `is_delete`, `created_dt`, `created_by`) VALUES
-('duda/janda', 'duda/janda', 'duda/janda', 'N', '2015-11-24 00:00:00', 'system'),
-('lajang', 'lajang', 'lajang', 'N', '2015-11-24 00:00:00', 'system'),
-('menikah', 'menikah', 'menikah', 'N', '2015-11-24 00:00:00', 'system');
+CREATE TABLE `pem_anggota_partai` (
+  `id` varchar(50) NOT NULL,
+  `id_partai` varchar(50) NOT NULL,
+  `NIK` varchar(16) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `jabatan` varchar(100) NOT NULL,
+  `masa_jabatan` datetime NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `foto` blob NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_anggota_partai_ktp_idx` (`NIK`),
+  KEY `fk_anggota_partai_partai_idx` (`id_partai`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pem_caleg`
+--
+
+CREATE TABLE `pem_caleg` (
+  `id` varchar(50) NOT NULL,
+  `id_partai` varchar(50) NOT NULL,
+  `NIK` varchar(50) NOT NULL,
+  `id_jadwal_pemilu` varchar(50) NOT NULL,
+  `id_tahap` varchar(50) NOT NULL,
+  `id_anggota_pemilu` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_caleg_nik_idx` (`NIK`),
+  KEY `fk_caleg_jadwal_idx` (`id_jadwal_pemilu`),
+  KEY `fk_caleg_partai_idx` (`id_partai`),
+  KEY `fk_caleg_tahap_idx` (`id_tahap`),
+  KEY `fk_caleg_anggota_idx` (`id_anggota_pemilu`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pem_jadwal`
+--
+
+CREATE TABLE `pem_jadwal` (
+  `id` varchar(50) NOT NULL,
+  `nama` text NOT NULL,
+  `tanggal_pelaksanaan` date NOT NULL,
+  `status` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pem_partai`
+--
+
+CREATE TABLE `pem_partai` (
+  `id` varchar(50) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `logo` blob NOT NULL,
+  `profile` text NOT NULL,
+  `visimisi` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pem_profile_anggota`
+--
+
+CREATE TABLE `pem_profile_anggota` (
+  `id` varchar(50) NOT NULL,
+  `pendidikan` varchar(255) NOT NULL,
+  `organisasi` varchar(255) NOT NULL,
+  `deskripsi` text NOT NULL,
+  `id_anggota` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_profile_anggota_idx` (`id_anggota`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pem_suara`
+--
+
+CREATE TABLE `pem_suara` (
+  `id` varchar(50) NOT NULL,
+  `caleg_pilihan` varchar(50) NOT NULL,
+  `id_pemilih` varchar(50) NOT NULL,
+  `id_tahap` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_suara_calegpilihan_idx` (`caleg_pilihan`),
+  KEY `fk_suara_pemilih_idx` (`id_pemilih`),
+  KEY `fk_suara_tahap_idx` (`id_tahap`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pem_tahap_pilihan`
+--
+
+CREATE TABLE `pem_tahap_pilihan` (
+  `id` varchar(50) NOT NULL,
+  `id_jadwal_pemilu` varchar(50) NOT NULL,
+  `nama` text NOT NULL,
+  `tahap` int(2) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_tahap_jadwal_idx` (`id_jadwal_pemilu`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pem_voter`
+--
+
+CREATE TABLE `pem_voter` (
+  `id` varchar(50) NOT NULL,
+  `id_jadwal_pemilu` varchar(50) NOT NULL,
+  `NIK` varchar(50) NOT NULL,
+  `tps_no` int(10) NOT NULL,
+  `lokasi` text NOT NULL,
+  `provinsi_tps` varchar(255) NOT NULL,
+  `kota_tps` varchar(255) NOT NULL,
+  `alamat_tps` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_voter_jadwal_idx` (`id_jadwal_pemilu`),
+  KEY `fk_voter_nik_idx` (`NIK`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -281,16 +391,6 @@ CREATE TABLE `sec_module` (
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `sec_module`
---
-
-INSERT INTO `sec_module` (`code`, `name`, `description`, `activityURL`, `created_dt`, `created_by`) VALUES
-('keluhan_ktp', 'keluhan ktp', 'keluhan ktp', 'com.coko.mdk3.modules.keluhanktpActivity', '2015-11-24', 'system'),
-('pemilu', 'pemilu', 'pemilu', 'com.coko.mdk3.modules.pemiluActivity', '2015-11-24', 'system'),
-('pendingTask', 'Pending Task Module', 'Pending Task Module', 'com.coko.mdk3.modules.pendingTaskActivity', '2015-11-24', 'system'),
-('userMaintance', 'userMaintance', 'userMaintance', 'com.coko.mdk3.modules.userMaintenanceAcitivy', '2015-11-24', 'system');
-
 -- --------------------------------------------------------
 
 --
@@ -299,21 +399,12 @@ INSERT INTO `sec_module` (`code`, `name`, `description`, `activityURL`, `created
 
 CREATE TABLE `sec_role` (
   `code` varchar(20) NOT NULL,
-  `name` varchar(100) NOT NULL,
+  `name` int(100) NOT NULL,
   `description` text NOT NULL,
   `created_dt` date NOT NULL,
   `created_by` varchar(20) NOT NULL,
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `sec_role`
---
-
-INSERT INTO `sec_role` (`code`, `name`, `description`, `created_dt`, `created_by`) VALUES
-('admin', 'admin', 'admin', '2015-11-24', 'system'),
-('staff', 'staff', 'staff', '2015-11-24', 'system'),
-('user', 'user', 'user', '2015-11-24', 'system');
 
 -- --------------------------------------------------------
 
@@ -322,7 +413,7 @@ INSERT INTO `sec_role` (`code`, `name`, `description`, `created_dt`, `created_by
 --
 
 CREATE TABLE `sec_role_module` (
-  `id` varchar(50) NOT NULL,
+  `id` varchar(20) NOT NULL,
   `roleCode` varchar(20) NOT NULL,
   `moduleCode` varchar(20) NOT NULL,
   `created_dt` date NOT NULL,
@@ -332,16 +423,6 @@ CREATE TABLE `sec_role_module` (
   KEY `fk_sec_role_module_sec_role1_idx` (`roleCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `sec_role_module`
---
-
-INSERT INTO `sec_role_module` (`id`, `roleCode`, `moduleCode`, `created_dt`, `created_by`) VALUES
-('a1c71f58-92c8-11e5-b7ed-df75ad050f3c', 'admin', 'userMaintance', '2015-11-24', 'system'),
-('a1c73402-92c8-11e5-b7ed-df75ad050f3c', 'staff', 'pendingTask', '2015-11-24', 'system'),
-('afa099b0-92c8-11e5-b7ed-df75ad050f3c', 'user', 'keluhan_ktp', '2015-11-24', ''),
-('afa0aae0-92c8-11e5-b7ed-df75ad050f3c', 'user', 'pemilu', '2015-11-24', 'system');
-
 -- --------------------------------------------------------
 
 --
@@ -349,7 +430,7 @@ INSERT INTO `sec_role_module` (`id`, `roleCode`, `moduleCode`, `created_dt`, `cr
 --
 
 CREATE TABLE `sec_user` (
-  `id` varchar(50) NOT NULL,
+  `id` varchar(20) NOT NULL,
   `NIK` varchar(16) NOT NULL,
   `is_login` char(1) NOT NULL,
   `created_dt` date NOT NULL,
@@ -359,14 +440,6 @@ CREATE TABLE `sec_user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `sec_user`
---
-
-INSERT INTO `sec_user` (`id`, `NIK`, `is_login`, `created_dt`, `created_by`, `updated_dt`, `updated_by`) VALUES
-('18aae9c6-92c7-11e5-b7ed-df75ad050f3c', '12345', 'N', '2015-11-24', 'system', NULL, NULL),
-('1f337222-92c7-11e5-b7ed-df75ad050f3c', '123456', 'N', '2015-11-24', 'system', NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -374,7 +447,7 @@ INSERT INTO `sec_user` (`id`, `NIK`, `is_login`, `created_dt`, `created_by`, `up
 --
 
 CREATE TABLE `sec_user_pass` (
-  `userId` varchar(50) NOT NULL,
+  `userId` varchar(20) NOT NULL,
   `passwd` varchar(50) NOT NULL,
   `validUntil` date NOT NULL,
   `created_dt` date NOT NULL,
@@ -384,14 +457,6 @@ CREATE TABLE `sec_user_pass` (
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `sec_user_pass`
---
-
-INSERT INTO `sec_user_pass` (`userId`, `passwd`, `validUntil`, `created_dt`, `created_by`, `updated_dt`, `updated_by`) VALUES
-('18aae9c6-92c7-11e5-b7ed-df75ad050f3c', 'password', '2016-12-31', '2015-11-24', 'system', '0000-00-00', ''),
-('1f337222-92c7-11e5-b7ed-df75ad050f3c', 'password', '2016-12-31', '2015-11-24', 'system', '0000-00-00', '');
-
 -- --------------------------------------------------------
 
 --
@@ -400,7 +465,7 @@ INSERT INTO `sec_user_pass` (`userId`, `passwd`, `validUntil`, `created_dt`, `cr
 
 CREATE TABLE `sec_user_role` (
   `id` varchar(50) NOT NULL,
-  `userId` varchar(50) NOT NULL,
+  `userId` varchar(20) NOT NULL,
   `roleCode` varchar(100) NOT NULL,
   `created_dt` date NOT NULL,
   `created_by` varchar(50) NOT NULL,
@@ -408,15 +473,6 @@ CREATE TABLE `sec_user_role` (
   KEY `fk_sec_user_role_sec_user1_idx` (`userId`),
   KEY `fk_sec_user_role_role_idx` (`roleCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `sec_user_role`
---
-
-INSERT INTO `sec_user_role` (`id`, `userId`, `roleCode`, `created_dt`, `created_by`) VALUES
-('1b7965e0-92d3-11e5-9742-5d0b21822c55', '18aae9c6-92c7-11e5-b7ed-df75ad050f3c', 'staff', '2015-11-25', 'system'),
-('f745caa6-92d2-11e5-9742-5d0b21822c55', '1f337222-92c7-11e5-b7ed-df75ad050f3c', 'user', '2015-11-25', 'system'),
-('f745f15c-92d2-11e5-9742-5d0b21822c55', '18aae9c6-92c7-11e5-b7ed-df75ad050f3c', 'admin', '2015-11-25', 'system');
 
 --
 -- Constraints for dumped tables
@@ -432,10 +488,10 @@ ALTER TABLE `dat_balance`
 -- Constraints for table `dat_ktp`
 --
 ALTER TABLE `dat_ktp`
-  ADD CONSTRAINT `fk_ktp_agama` FOREIGN KEY (`Agama`) REFERENCES `mt_agama` (`cd`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_ktp_jenis_kelamin` FOREIGN KEY (`Jenis_Kelamin`) REFERENCES `mt_jenis_kelamin` (`cd`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_ktp_kecamatan` FOREIGN KEY (`Kecamatan`) REFERENCES `mt_kecamatan` (`cd`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_ktp_status_kawin` FOREIGN KEY (`Status_Kawin`) REFERENCES `mt_status_kawin` (`cd`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_ktp_status_kawin` FOREIGN KEY (`Status_Kawin`) REFERENCES `mt_status_kawin` (`cd`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_ktp_jenis_kelamin` FOREIGN KEY (`Jenis_Kelamin`) REFERENCES `mt_jenis_kelamin` (`cd`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_ktp_agama` FOREIGN KEY (`Agama`) REFERENCES `mt_agama` (`cd`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `log_financial_history`
@@ -462,6 +518,50 @@ ALTER TABLE `mt_kecamatan`
   ADD CONSTRAINT `fk_kecamatan` FOREIGN KEY (`kabupaten`) REFERENCES `mt_kabupaten` (`cd`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Constraints for table `pem_anggota_partai`
+--
+ALTER TABLE `pem_anggota_partai`
+  ADD CONSTRAINT `fk_anggota_partai_ktp` FOREIGN KEY (`NIK`) REFERENCES `dat_ktp` (`NIK`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_anggota_partai_partai` FOREIGN KEY (`id_partai`) REFERENCES `pem_partai` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `pem_caleg`
+--
+ALTER TABLE `pem_caleg`
+  ADD CONSTRAINT `fk_caleg_nik` FOREIGN KEY (`NIK`) REFERENCES `dat_ktp` (`NIK`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_caleg_jadwal` FOREIGN KEY (`id_jadwal_pemilu`) REFERENCES `pem_jadwal` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_caleg_partai` FOREIGN KEY (`id_partai`) REFERENCES `pem_partai` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_caleg_tahap` FOREIGN KEY (`id_tahap`) REFERENCES `pem_tahap_pilihan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_caleg_anggota` FOREIGN KEY (`id_anggota_pemilu`) REFERENCES `pem_anggota_partai` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `pem_profile_anggota`
+--
+ALTER TABLE `pem_profile_anggota`
+  ADD CONSTRAINT `fk_profile_anggota` FOREIGN KEY (`id_anggota`) REFERENCES `pem_anggota_partai` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `pem_suara`
+--
+ALTER TABLE `pem_suara`
+  ADD CONSTRAINT `fk_suara_calegpilihan` FOREIGN KEY (`caleg_pilihan`) REFERENCES `pem_caleg` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_suara_pemilih` FOREIGN KEY (`id_pemilih`) REFERENCES `dat_ktp` (`NIK`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_suara_tahap` FOREIGN KEY (`id_tahap`) REFERENCES `pem_tahap_pilihan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `pem_tahap_pilihan`
+--
+ALTER TABLE `pem_tahap_pilihan`
+  ADD CONSTRAINT `fk_tahap_jadwal` FOREIGN KEY (`id_jadwal_pemilu`) REFERENCES `pem_jadwal` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `pem_voter`
+--
+ALTER TABLE `pem_voter`
+  ADD CONSTRAINT `fk_voter_jadwal` FOREIGN KEY (`id_jadwal_pemilu`) REFERENCES `pem_jadwal` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_voter_nik` FOREIGN KEY (`NIK`) REFERENCES `dat_ktp` (`NIK`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Constraints for table `sec_role_module`
 --
 ALTER TABLE `sec_role_module`
@@ -478,6 +578,5 @@ ALTER TABLE `sec_user_pass`
 -- Constraints for table `sec_user_role`
 --
 ALTER TABLE `sec_user_role`
-  ADD CONSTRAINT `fk_sec_user_role_role` FOREIGN KEY (`roleCode`) REFERENCES `sec_role` (`code`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_sec_user_role_user` FOREIGN KEY (`userId`) REFERENCES `sec_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
+  ADD CONSTRAINT `fk_sec_user_role_user` FOREIGN KEY (`userId`) REFERENCES `sec_user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_sec_user_role_role` FOREIGN KEY (`roleCode`) REFERENCES `sec_role` (`code`) ON DELETE NO ACTION ON UPDATE NO ACTION;
