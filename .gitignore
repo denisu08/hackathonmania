@@ -11,3 +11,7 @@ LICENSE.txt
 Client/Mdk3/build/intermediates/gradle_project_sync_data.bin
 Client/Mdk3/build/intermediates/gradle_project_sync_data.bin
 Client/Mdk3/local.properties
+*.xml
+*.xml
+*.xml
+Server/md3_backend/.classpath

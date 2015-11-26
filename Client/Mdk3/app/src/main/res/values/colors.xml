@@ -17,7 +17,7 @@
 <resources>
     <color name="colorPrimary">#D50000</color>
     <color name="colorPrimaryDark">#b71c1c</color>
-
+    <color name="lightMainColor">#ff5252</color>
     <color name="colorSecondary">@color/material_deep_teal_200</color>
     <color name="colorSecondaryDark">@color/material_deep_teal_500</color>
 

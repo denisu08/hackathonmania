@@ -3,8 +3,11 @@ package com.coko.mdk3;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.GridView;
 
 public class ScheduleDetailActivity extends BaseActivity {
+
+    private GridView gridView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
