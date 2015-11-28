@@ -73,6 +73,14 @@ DEFAULT CHARACTER SET = latin1;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `mdk3db`.`mt_kecamatan` ;
 
+SET foreign_key_checks = 0;
+DROP TABLE IF EXISTS `mdk3db`.`mt_kecamatan` ;
+SET foreign_key_checks = 1;
+
+--SET foreign_key_checks = 0;
+--alter table mt_kecamatan add constraint fk_kecamatan_kabupaten foreign key(kabupaten) references mt_kabupaten (cd);
+--SET foreign_key_checks = 1;
+
 CREATE TABLE IF NOT EXISTS `mdk3db`.`mt_kecamatan` (
   `cd` VARCHAR(20) NOT NULL,
   `name` VARCHAR(100) NOT NULL,
@@ -82,15 +90,15 @@ CREATE TABLE IF NOT EXISTS `mdk3db`.`mt_kecamatan` (
   `created_by` VARCHAR(20) NOT NULL,
   `kabupaten` VARCHAR(20) NOT NULL,
   `tot_desa` INT(11) NOT NULL,
-  PRIMARY KEY (`cd`),
-  INDEX `fk_kecamatan_idx` (`kabupaten` ASC),
-  CONSTRAINT `fk_kecamatan`
-    FOREIGN KEY (`kabupaten`)
-    REFERENCES `mdk3db`.`mt_kabupaten` (`cd`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
+  PRIMARY KEY (`cd`)),
+--  INDEX `fk_kecamatan_idx` (`kabupaten` ASC),
+--  CONSTRAINT `fk_kecamatan`
+--    FOREIGN KEY (`kabupaten`)
+--    REFERENCES `mdk3db`.`mt_kabupaten` (`cd`)
+--    ON DELETE NO ACTION
+--    ON UPDATE NO ACTION)
+--ENGINE = InnoDB
+--DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
