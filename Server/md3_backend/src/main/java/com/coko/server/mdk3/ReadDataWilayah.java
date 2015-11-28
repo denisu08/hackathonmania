@@ -30,7 +30,7 @@ public class ReadDataWilayah {
 	
 	private static String Regex_Kecamatan = "[0-9]{2}+\\.[0-9]{2}+\\.[0-9]{2}+";
 	private static String Insert_Query_Kecamatan = "insert into mt_kecamatan(cd, name, keterangan, is_delete, created_dt, created_by, kabupaten, tot_desa) "
-			+ " values ('%s', '%s', '%s', 'Y', current_date, 'system', '%s', '%s');";
+			+ " values ('%s', '%s', '%s', 'N', current_date, 'system', '%s', '%s');";
 	
 	private Pattern p;
 	
