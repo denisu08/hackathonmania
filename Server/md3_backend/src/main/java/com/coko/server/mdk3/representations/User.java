@@ -1,5 +1,7 @@
 package com.coko.server.mdk3.representations;
 
+import io.dropwizard.validation.ValidationMethod;
+
 import java.security.Principal;
 import java.sql.Timestamp;
 import java.util.List;
@@ -105,4 +107,11 @@ public class User implements Principal {
 		this.modules = modules;
 	}
 
+	
+	@JsonIgnore
+	@ValidationMethod(message="Username or Password is not a valid!")
+	public boolean isValidPerson() {
+		// TO-DO: add check regex special / inject character
+		return true;
+	}
 }

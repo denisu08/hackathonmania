@@ -25,50 +25,48 @@ import javax.ws.rs.core.UriInfo;
 
 import org.skife.jdbi.v2.DBI;
 
-import com.coko.server.mdk3.dao.EKTPDAO;
-import com.coko.server.mdk3.representations.DataKTP;
+import com.coko.server.mdk3.dao.PemiluDAO;
+import com.coko.server.mdk3.representations.DataPemilu;
 
-@Path("/eKTPModule")
+@Path("/pemiluModule")
 @Produces(MediaType.APPLICATION_JSON)
-public class EKTPModuleResource {
-	
+public class PemiluModuleResource {
 	@Context
 	UriInfo uri;
 	
-	private final EKTPDAO contactDao;
+	private final PemiluDAO pemiluDAO;
 	private final Validator validator;
-	
-    public EKTPModuleResource(DBI jdbi, Validator validator) {
-    	contactDao = jdbi.onDemand(EKTPDAO.class);
+    public PemiluModuleResource(DBI jdbi, Validator validator) {
+    	pemiluDAO = jdbi.onDemand(PemiluDAO.class);
     	this.validator = validator;
     }
     
-	@GET
+    @GET
 	@Path("/{id}")
 	@RolesAllowed({"admin", "staff", "user"})
-	public Response getKTP(@PathParam("id") int id) {
+	public Response getPemilu(@PathParam("id") int id) {
 		// retrieve information about the contact with the provided id
-		DataKTP contact = contactDao.getContactById(id);
+    	DataPemilu contact = pemiluDAO.getContactById(id);
 		return Response.ok(contact).build();
 	}
 	
 	@POST
 	@RolesAllowed({"admin", "staff", "user"})
-    public Response createKTP(@Valid DataKTP contact, @Context HttpHeaders headers) throws URISyntaxException {
+    public Response createPemilu(@Valid DataPemilu contact, @Context HttpHeaders headers) throws URISyntaxException {
 		// Validate the contact's data
-		Set<ConstraintViolation<DataKTP>> violations = validator.validate(contact);
+		Set<ConstraintViolation<DataPemilu>> violations = validator.validate(contact);
 		// Are there any constraint violations?
 		if (violations.size() > 0) {
 			// Validation errors occurred
 		    ArrayList<String> validationMessages = new ArrayList<String>();
-		    for (ConstraintViolation<DataKTP> violation : violations) {
+		    for (ConstraintViolation<DataPemilu> violation : violations) {
 		    	validationMessages.add(violation.getPropertyPath().toString() +":" + violation.getMessage());
 		    }
 	        return Response.status(Status.BAD_REQUEST).entity(validationMessages).build();
 		} else {
 	        // OK, no validation errors
 	        // Store the new contact
-	        int newContactId = contactDao.createContact(contact.getFirstName(), contact.getLastName(), contact.getPhone());
+	        int newContactId = pemiluDAO.createContact(contact.getFirstName(), contact.getLastName(), contact.getPhone());
 	        return Response.created(new URI(uri.getRequestUri().toString().concat("/" + String.valueOf(newContactId)))).build();
 		}
     }
@@ -76,22 +74,22 @@ public class EKTPModuleResource {
 	@DELETE
 	@Path("/{id}")
 	@RolesAllowed({"admin", "staff", "user"})
-	public Response deleteKTP(@PathParam("id") int id) {
+	public Response deletePemilu(@PathParam("id") int id) {
 		// delete the contact with the provided id
-        contactDao.deleteContact(id);
+		pemiluDAO.deleteContact(id);
         return Response.noContent().build();
 	}
 
 	@PUT
 	@Path("/{id}")
-	public Response updateContact(@PathParam("id") int id, DataKTP contact) {
+	public Response updatePemilu(@PathParam("id") int id, DataPemilu contact) {
 		// Validate the updated data
-		Set<ConstraintViolation<DataKTP>> violations = validator.validate(contact);
+		Set<ConstraintViolation<DataPemilu>> violations = validator.validate(contact);
 		// Are there any constraint violations?
 		if (violations.size() > 0) {
 			// Validation errors occurred
             ArrayList<String> validationMessages = new ArrayList<String>();
-            for (ConstraintViolation<DataKTP> violation : violations) {
+            for (ConstraintViolation<DataPemilu> violation : violations) {
             	validationMessages.add(violation.getPropertyPath().toString() +":" + violation.getMessage());
             }
             
@@ -100,8 +98,8 @@ public class EKTPModuleResource {
 		} else {
 		    // No errors
 		    // update the contact with the provided ID
-		    contactDao.updateContact(id, contact.getFirstName(), contact.getLastName(), contact.getPhone());
-		    return Response.ok( new DataKTP(id, contact.getFirstName(), contact.getLastName(), contact.getPhone())).build();
+			pemiluDAO.updateContact(id, contact.getFirstName(), contact.getLastName(), contact.getPhone());
+		    return Response.ok( new DataPemilu(id, contact.getFirstName(), contact.getLastName(), contact.getPhone())).build();
 		}
 	}
 }

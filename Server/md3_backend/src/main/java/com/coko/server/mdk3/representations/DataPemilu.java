@@ -1,14 +1,10 @@
 package com.coko.server.mdk3.representations;
 
-import io.dropwizard.validation.ValidationMethod;
-
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-public class DataKTP {
-	private int id;
+public class DataPemilu {
+private int id;
 	
 	@NotBlank
     @Length(min=2, max=255)
@@ -22,7 +18,7 @@ public class DataKTP {
     @Length(min=2, max=30)
 	private String phone;
 
-	public DataKTP() {
+	public DataPemilu() {
 		this.id = 0;
 		this.firstName = null;
 		this.lastName = null;
@@ -45,7 +41,7 @@ public class DataKTP {
 		this.phone = phone;
 	}
 
-	public DataKTP(int id, String firstName, String lastName, String phone) {
+	public DataPemilu(int id, String firstName, String lastName, String phone) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;

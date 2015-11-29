@@ -8,7 +8,7 @@ import org.skife.jdbi.v2.sqlobject.helpers.MapResultAsBean;
 
 import com.coko.server.mdk3.representations.DataKTP;
 
-public interface DataDAO {
+public interface EKTPDAO {
 
 	@MapResultAsBean
 	@SqlQuery("select * from dat_ktp where id = :id")
