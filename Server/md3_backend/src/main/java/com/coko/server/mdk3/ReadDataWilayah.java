@@ -16,7 +16,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.coko.server.mdk3.helpers.NumberConversion;
+import com.coko.server.mdk3.helpers.MDK3Tools;
 
 public class ReadDataWilayah {
 	
@@ -93,7 +93,7 @@ public class ReadDataWilayah {
 				
 		if(m.matches()) {
 			
-			int no = NumberConversion.romanToDecimal(ReadCellAsString(row.getCell(0), "0"));
+			int no = MDK3Tools.romanToDecimal(ReadCellAsString(row.getCell(0), "0"));
 			String code = ReadCellAsString(row.getCell(1), "");
 			String name = ReadCellAsString(row.getCell(3), "");
 			String total_kab = ReadCellAsString(row.getCell(5), "0");
