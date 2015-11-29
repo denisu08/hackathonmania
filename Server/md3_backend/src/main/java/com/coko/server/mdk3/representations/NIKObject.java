@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 import com.coko.server.mdk3.dao.ParameterDAO;
 import com.coko.server.mdk3.helpers.MDK3Tools;
+import com.coko.server.mdk3.resources.ErrorMessage;
 
 public class NIKObject {
 	/*
@@ -22,37 +23,37 @@ public class NIKObject {
 	
 	private String PATTERN_NUMERIC = "[0-9]";
 	
-	private String ERROR_MESSAGE_EMPTY = "NIK( is empty";
-	private String ERROR_MESSAGE_LENGTH = "NIK(%s) length must be %d";
-	private String ERROR_MESSAGE_NOT_VALID = "NIK(%s) is not valid (%s)";
+	private String ERROR_MESSAGE_EMPTY = "NIK is empty";
+	private String ERROR_MESSAGE_LENGTH = "NIK length must be %d";
+	private String ERROR_MESSAGE_NOT_VALID = "NIK is not valid";
 	
 	private Pattern pattern = Pattern.compile(PATTERN_NUMERIC);
 	
 	public NIKObject(String nik, ParameterDAO paramDAO) {
 		
-		GenerateError(nik != null, ERROR_MESSAGE_EMPTY);
-		GenerateError(nik.length() == 16, ERROR_MESSAGE_LENGTH, nik, 16);
+		GenerateError(nik != null, ERROR_MESSAGE_EMPTY, "NIK");
+		GenerateError(nik.length() == 16, ERROR_MESSAGE_LENGTH, "NIK", 16);
 		if(!validationMessages.isEmpty()) return;
 		
 		propinsi = nik.substring(0, 2);
-		GenerateError(paramDAO.getProvinsiByCode(propinsi) == null, ERROR_MESSAGE_NOT_VALID, nik, "Propinsi");
+		GenerateError(paramDAO.getProvinsiByCode(propinsi) == null, ERROR_MESSAGE_NOT_VALID, "Propinsi");
 		
 		kabupaten = nik.substring(2, 4);
-		GenerateError(paramDAO.getKabupatenByCode(kabupaten) == null, ERROR_MESSAGE_NOT_VALID, nik, "Kabupaten");
+		GenerateError(paramDAO.getKabupatenByCode(kabupaten) == null, ERROR_MESSAGE_NOT_VALID, "Kabupaten");
 		
 		kecamatan = nik.substring(4, 6);
-		GenerateError(paramDAO.getKecamatanByCode(kecamatan) == null, ERROR_MESSAGE_NOT_VALID, nik, "Kecamatan");
+		GenerateError(paramDAO.getKecamatanByCode(kecamatan) == null, ERROR_MESSAGE_NOT_VALID, "Kecamatan");
 		
 		tanggalLahir = nik.substring(6, 8);
-		GenerateError(pattern.matcher(tanggalLahir).matches(), ERROR_MESSAGE_NOT_VALID, nik, "Tanggal Lahir");
-		GenerateError(Integer.parseInt(tanggalLahir) > 0 && Integer.parseInt(tanggalLahir) < 32, ERROR_MESSAGE_NOT_VALID, nik, "Tanggal Lahir");		
+		GenerateError(pattern.matcher(tanggalLahir).matches(), ERROR_MESSAGE_NOT_VALID, "Tanggal Lahir");
+		GenerateError(Integer.parseInt(tanggalLahir) > 0 && Integer.parseInt(tanggalLahir) < 32, ERROR_MESSAGE_NOT_VALID, "Tanggal Lahir");		
 		
 		bulanLahir = nik.substring(8, 10);
-		GenerateError(pattern.matcher(tanggalLahir).matches(), ERROR_MESSAGE_NOT_VALID, nik, "Bulan Lahir");
-		GenerateError(Integer.parseInt(tanggalLahir) > 0 && Integer.parseInt(bulanLahir) < 13, ERROR_MESSAGE_NOT_VALID, nik, "Bulan Lahir");
+		GenerateError(pattern.matcher(tanggalLahir).matches(), ERROR_MESSAGE_NOT_VALID, "Bulan Lahir");
+		GenerateError(Integer.parseInt(tanggalLahir) > 0 && Integer.parseInt(bulanLahir) < 13, ERROR_MESSAGE_NOT_VALID, "Bulan Lahir");
 		
 		tahunLahir = nik.substring(10, 12);
-		GenerateError(pattern.matcher(tanggalLahir).matches(), ERROR_MESSAGE_NOT_VALID, nik, "Tahun Lahir");
+		GenerateError(pattern.matcher(tanggalLahir).matches(), ERROR_MESSAGE_NOT_VALID, "Tahun Lahir");
 		
 		nomorKomputerisasi = nik.substring(12, 16);
 	}
@@ -65,15 +66,15 @@ public class NIKObject {
 	private String tahunLahir;
 	private String nomorKomputerisasi;
 	
-	private Set<String> validationMessages = new HashSet<String>();
-	public Set<String> getErrorMessages() {
+	private Set<ErrorMessage> validationMessages = new HashSet<ErrorMessage>();
+	public Set<ErrorMessage> getErrorMessages() {
 		return validationMessages;
 	}
 	
-	public void GenerateError(boolean isValid, String messageError, Object... params) {
+	public void GenerateError(boolean isValid, String messageError, String key, Object... params) {
 		if(!isValid) {
 			String errorMessage = String.format(messageError, params);
-			validationMessages.add(errorMessage);
+			validationMessages.add(new ErrorMessage(key, errorMessage));
 			
 			System.out.println("Error:: " + errorMessage);
 		}
